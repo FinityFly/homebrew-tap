@@ -1,0 +1,32 @@
+name: Update Formula on Release
+
+on:
+  repository_dispatch:
+    types: [clitris_release]
+
+jobs:
+  update-formula:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download new tarball
+        run: |
+          wget ${{ github.event.client_payload.tarball_url }} -O clitris.tar.gz
+
+      - name: Calculate SHA256
+        id: sha
+        run: echo "sha256=$(shasum -a 256 clitris.tar.gz | awk '{print $1}')" >> $GITHUB_OUTPUT
+
+      - name: Update Formula
+        run: |
+          sed -i "s|url \".*\"|url \"${{ github.event.client_payload.tarball_url }}\"|" Formula/clitris.rb
+          sed -i "s|sha256 \".*\"|sha256 \"${{ steps.sha.outputs.sha256 }}\"|" Formula/clitris.rb
+
+      - name: Commit and push
+        run: |
+          git config user.name "FinityFly"
+          git config user.email "daniel1211.lu@gmail.com"
+          git add Formula/clitris.rb
+          git commit -m "Update clitris formula for ${{ github.event.client_payload.version }}"
+          git push
