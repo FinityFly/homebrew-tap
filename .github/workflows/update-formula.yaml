@@ -27,9 +27,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
         run: |
-          git config user.name "FinityFly"
-          git config user.email "daniel1211.lu@gmail.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add Formula/clitris.rb
           git commit -m "Update clitris formula for ${{ github.event.client_payload.version }}"
+          echo "Pushing changes to GitHub..."
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/FinityFly/homebrew-tap.git
+          echo "Pushing changes to main branch..."
           git push origin main
