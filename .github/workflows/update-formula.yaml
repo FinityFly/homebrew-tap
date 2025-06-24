@@ -24,14 +24,9 @@ jobs:
           sed -i "s|sha256 \".*\"|sha256 \"${{ steps.sha.outputs.sha256 }}\"|" Formula/clitris.rb
 
       - name: Commit and push
-        env:
-          GH_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "FinityFly"
+          git config user.email "daniel1211.lu@gmail.com"
           git add Formula/clitris.rb
           git commit -m "Update clitris formula for ${{ github.event.client_payload.version }}"
-          echo "Pushing changes to GitHub..."
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/FinityFly/homebrew-tap.git
-          echo "Pushing changes to main branch..."
-          git push origin main
+          git push
