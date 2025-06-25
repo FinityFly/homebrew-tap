@@ -1,8 +1,8 @@
 class Clitris < Formula
   desc "Command Line Interface Tetris"
   homepage "https://github.com/FinityFly/clitris"
-  url "https://github.com/FinityFly/clitris/releases/download/v0.0.15/clitris-v0.0.15.tar.gz"
-  sha256 "5e2357b08534ab532af7d8082104ec8a800bb049a65d0eb02974637142b8e071"
+  url "https://github.com/FinityFly/clitris/releases/download/v0.0.16/clitris-v0.0.16.tar.gz"
+  sha256 "dc7f8a7d356c25b5f51e01d37fe19c24f366178a4c3e55c4a97f9acb2815ce44"
   license "MIT"
 
   uses_from_macos "ncurses"
