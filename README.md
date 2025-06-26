@@ -5,7 +5,11 @@
 ### Homebrew
 Install:
 ```sh
-brew install FinityFly/tap/clitris --force
+brew install FinityFly/tap/clitris
+```
+Upgrade:
+```sh
+brew upgrade clitris
 ```
 Uninstall:
 ```sh
